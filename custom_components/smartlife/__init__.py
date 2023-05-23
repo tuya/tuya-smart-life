@@ -179,9 +179,7 @@ async def async_remove_entry(hass: HomeAssistant, entry: ConfigEntry) -> None:
     """Remove a config entry."""
     LOGGER.debug("remove entry id = %s", entry.entry_id)
     hass_data: HomeAssistantSmartLifeData = hass.data[DOMAIN][entry.entry_id]
-    entry.data["token_info"] = {
-        "refresh_token": "hahah"  # hass_data.manager.customer_api.token_info.refresh_token
-    }
+
     if hass_data.manager.mq is not None:
         hass_data.manager.mq.stop()
     hass_data.manager.remove_device_listener(hass_data.listener)
