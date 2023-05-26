@@ -36,6 +36,7 @@ class SmartlifeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             self._user_code = user_input[CONF_USER_CODE]
             response = await self.hass.async_add_executor_job(self.login_control.qr_code, CONF_CLIENT_ID, CONF_SCHEMA,
                                                               self._user_code)
+            LOGGER.debug("qr_code response = %s", response)
             if response.get("success", False):
                 qr_code = response["result"]["qrcode"]
                 self._qr_code = qr_code

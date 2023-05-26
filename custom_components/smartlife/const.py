@@ -34,7 +34,7 @@ LOGGER = logging.getLogger(__package__)
 CONF_ENDPOINT = "endpoint"
 CONF_USER_CODE = "user_code"
 CONF_CLIENT_ID = "HA_3y9q4ak7g4ephrvke"
-CONF_SCHEMA = "oreotestadvanced1"
+CONF_SCHEMA = "haauthorize"
 
 
 SMART_LIFE_DISCOVERY_NEW = "smartlife_discovery_new"

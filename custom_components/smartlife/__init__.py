@@ -1,5 +1,5 @@
 """Support for smartlife devices."""
-from typing import NamedTuple
+from typing import NamedTuple, Any
 
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.config_entries import ConfigEntry
@@ -18,7 +18,7 @@ from .const import (
     SMART_LIFE_DISCOVERY_NEW
 )
 
-from tuya_sharing import Manager, SharingDeviceListener, CustomerDevice
+from tuya_sharing import Manager, SharingDeviceListener, CustomerDevice, SharingTokenListener
 from tuya_sharing import logger
 
 logger.setLevel(LOGGER.getEffectiveLevel())
@@ -35,26 +35,24 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Async setup hass config entry."""
     hass.data.setdefault(DOMAIN, {})
 
-    if "smart_life_data" not in entry.data:
+    if hass.data[DOMAIN].get(entry.entry_id) is None:
+        token_listener = TokenListener(hass, entry)
         smart_life_manager = Manager(
             CONF_CLIENT_ID,
             entry.data["user_code"],
             entry.data["terminal_id"],
             entry.data["endpoint"],
-            entry.data["token_info"]
+            entry.data["token_info"],
+            token_listener
         )
 
         listener = DeviceListener(hass, smart_life_manager)
         smart_life_manager.add_device_listener(listener)
-        home_assistant_smartlife_data = HomeAssistantSmartLifeData(
+        hass.data[DOMAIN][entry.entry_id] = HomeAssistantSmartLifeData(
             manager=smart_life_manager,
             listener=listener
         )
-        hass.data[DOMAIN][entry.entry_id] = home_assistant_smartlife_data
-        data = {**entry.data, "smart_life_data": home_assistant_smartlife_data}
-        hass.config_entries.async_update_entry(entry, data=data)
     else:
-        hass.data[DOMAIN][entry.entry_id] = entry.data["smart_life_data"]
         hass_data: HomeAssistantSmartLifeData = hass.data[DOMAIN][entry.entry_id]
         smart_life_manager = hass_data.manager
 
@@ -232,3 +230,19 @@ class DeviceListener(SharingDeviceListener):
         )
         if device_entry is not None:
             device_registry.async_remove_device(device_entry.id)
+
+
+class TokenListener(SharingTokenListener):
+    def __init__(
+            self,
+            hass: HomeAssistant,
+            entry: ConfigEntry,
+    ) -> None:
+        """Init TokenListener."""
+        self.hass = hass
+        self.entry = entry
+
+    def update_token(self, token_info: [str, Any]):
+        data = {**self.entry.data, "token_info": token_info}
+        LOGGER.debug("update token info : %s", data)
+        self.hass.config_entries.async_update_entry(self.entry, data=data)

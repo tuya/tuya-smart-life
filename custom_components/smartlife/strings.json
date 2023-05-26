@@ -4,7 +4,7 @@
       "user": {
         "description": "Please enter the User Code from \n Smart Life App > Me > Settings > Account and Security",
         "data": {
-          "user_code": "App Code"
+          "user_code": "User Code"
         }
       },
       "scan": {
