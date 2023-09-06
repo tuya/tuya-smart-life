@@ -21,6 +21,7 @@ from homeassistant.const import (
     UnitOfElectricPotential,
     UnitOfPower,
     UnitOfTime,
+    UnitOfEnergy,
 )
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.dispatcher import async_dispatcher_connect
@@ -816,6 +817,35 @@ SENSORS: dict[str, tuple[SmartLifeSensorEntityDescription, ...]] = {
             state_class=SensorStateClass.MEASUREMENT,
             native_unit_of_measurement=UnitOfElectricPotential.VOLT,
             subkey="voltage",
+        ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.ADD_ELE,
+            name="add ele",
+            device_class=SensorDeviceClass.ENERGY,
+            state_class=SensorStateClass.TOTAL_INCREASING,
+            native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+            entity_registry_enabled_default=True,
+        ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.CUR_CURRENT,
+            name="Current",
+            device_class=SensorDeviceClass.CURRENT,
+            state_class=SensorStateClass.MEASUREMENT,
+            entity_registry_enabled_default=True,
+        ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.CUR_POWER,
+            name="Power",
+            device_class=SensorDeviceClass.POWER,
+            state_class=SensorStateClass.MEASUREMENT,
+            entity_registry_enabled_default=True,
+        ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.CUR_VOLTAGE,
+            name="Voltage",
+            device_class=SensorDeviceClass.VOLTAGE,
+            state_class=SensorStateClass.MEASUREMENT,
+            entity_registry_enabled_default=True,
         ),
     ),
     # Robot Vacuum
