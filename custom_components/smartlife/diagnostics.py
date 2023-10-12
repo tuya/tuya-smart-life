@@ -22,14 +22,14 @@ from .const import (
 
 
 async def async_get_config_entry_diagnostics(
-    hass: HomeAssistant, entry: ConfigEntry
+        hass: HomeAssistant, entry: ConfigEntry
 ) -> dict[str, Any]:
     """Return diagnostics for a config entry."""
     return _async_get_diagnostics(hass, entry)
 
 
 async def async_get_device_diagnostics(
-    hass: HomeAssistant, entry: ConfigEntry, device: DeviceEntry
+        hass: HomeAssistant, entry: ConfigEntry, device: DeviceEntry
 ) -> dict[str, Any]:
     """Return diagnostics for a device entry."""
     return _async_get_diagnostics(hass, entry, device)
@@ -37,9 +37,9 @@ async def async_get_device_diagnostics(
 
 @callback
 def _async_get_diagnostics(
-    hass: HomeAssistant,
-    entry: ConfigEntry,
-    device: DeviceEntry | None = None,
+        hass: HomeAssistant,
+        entry: ConfigEntry,
+        device: DeviceEntry | None = None,
 ) -> dict[str, Any]:
     """Return diagnostics for a config entry."""
     hass_data: HomeAssistantSmartLifeData = hass.data[DOMAIN][entry.entry_id]
@@ -78,6 +78,7 @@ def _async_device_as_dict(hass: HomeAssistant, device: CustomerDevice) -> dict[s
 
     # Base device information, without sensitive information.
     data = {
+        "id": device.id,
         "name": device.name,
         "category": device.category,
         "product_id": device.product_id,
@@ -92,6 +93,8 @@ def _async_device_as_dict(hass: HomeAssistant, device: CustomerDevice) -> dict[s
         "status_range": {},
         "status": {},
         "home_assistant": {},
+        "set_up": device.set_up,
+        "support_local": device.support_local,
     }
 
     # Gather smartlife states

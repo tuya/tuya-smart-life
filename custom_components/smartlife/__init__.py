@@ -7,6 +7,8 @@ from homeassistant.helpers import device_registry as dr, entity_registry as er
 from homeassistant.components.light import DOMAIN as LIGHT_DOMAIN
 from homeassistant.components.switch import DOMAIN as SWITCH_DOMAIN
 from homeassistant.helpers.dispatcher import dispatcher_send
+from homeassistant.const import __version__
+from homeassistant.loader import async_get_integration
 
 from .const import (
     DOMAIN,
@@ -56,6 +58,16 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         hass_data: HomeAssistantSmartLifeData = hass.data[DOMAIN][entry.entry_id]
         smart_life_manager = hass_data.manager
 
+    integration = await async_get_integration(hass, DOMAIN)
+    manifest = integration.manifest
+    smart_life_version = manifest["version"]
+    sdk_version = manifest["requirements"]
+    sharing_sdk = ""
+    for item in sdk_version:
+        if "device-sharing-sdk" in item:
+            sharing_sdk = item.split("==")[1]
+    await hass.async_add_executor_job(smart_life_manager.report_version, __version__, smart_life_version, sharing_sdk)
+
     # Get devices & clean up device entities
     await hass.async_add_executor_job(smart_life_manager.update_device_cache)
     await cleanup_device_registry(hass, smart_life_manager)
@@ -74,6 +86,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         )
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
+    await hass.async_add_executor_job(smart_life_manager.refresh_mq)
     return True
 
 

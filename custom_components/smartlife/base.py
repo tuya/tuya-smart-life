@@ -138,6 +138,7 @@ class SmartLifeEntity(Entity):
     def __init__(self, device: CustomerDevice, device_manager: Manager) -> None:
         """Init SmartLifeHaEntity."""
         self._attr_unique_id = f"smartlife.{device.id}"
+        device.set_up = True
         self.device = device
         self.device_manager = device_manager
 
@@ -226,7 +227,7 @@ class SmartLifeEntity(Entity):
                         continue
                     return enum_type
 
-                LOGGER.debug("dpcode get device=%s dpcode=%s key=%s",self.device,dpcode,key)
+                LOGGER.debug("dpcode get device=%s dpcode=%s key=%s", self.device, dpcode, key)
 
                 if (
                         dptype == DPType.INTEGER
