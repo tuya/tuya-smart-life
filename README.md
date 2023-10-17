@@ -32,7 +32,7 @@ Please provide feedback to Tuya through [Github Issues](https://github.com/tuya/
 
 ## Video Guide
 
-[![Watch the video](https://images.tuyaus.com/content-platform/hestia/16975151956db23d16f4d.mp4)](https://images.tuyaus.com/content-platform/hestia/16975151956db23d16f4d.mp4)
+[![Watch the video](./docs/video_image.png)](https://images.tuyaus.com/content-platform/hestia/16975151956db23d16f4d.mp4)
 
 ## Prerequisites
 
