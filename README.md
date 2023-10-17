@@ -1,5 +1,4 @@
-# Tuya Smart Life (Beta)
-Tuya Smart Life (Beta) Home Assistant Integration
+# Smart Life (Beta) Home Assistant Integration
 
 [![GitHub license](https://img.shields.io/github/license/tuya/tuya-smart-life.svg)](https://github.com/tuya/tuya-smart-life/blob/main/LICENSE)
 [![GitHub contributors](https://img.shields.io/github/contributors/tuya/tuya-smart-life.svg)](https://github.com/tuya/tuya-smart-life/graphs/contributors)
