@@ -27,6 +27,16 @@ We really appreciate your contributions and awesome ideas to this project. We ar
 
 Please provide feedback to Tuya through [Github Issues](https://github.com/tuya/tuya-smart-life/issues/) to help us improve and optimize it.
 
+## Important Note
+### What's the difference between "Tuya" and "Smart Life" Integration?
+
+1. [Tuya Integration](https://www.home-assistant.io/integrations/tuya/) relies on [Tuya IoT Core Service subscription](https://iot.tuya.com/cloud/products/detail?abilityId=1442730014117204014), if the subscription has expired, the integration will stop working. Users are required to manually extend the trial subscription period, which can be inconvenient and frustrating.
+
+2. Tuya Smart Life (Beta) integration has removed the Tuya cloud development workflow, allowing users to simply scan and log in using the [Smart Life app](https://developer.tuya.com/en/docs/iot/tuya-smart-app-smart-life-app-advantages?id=K989rqa49rluq), and then seamlessly sync their IoT devices directly to Home Assistant. It offers a simplified and efficient solution.
+
+**Note:** If you are transitioning from the **Tuya Integration** to the **Smart Life (Beta) integration**, it may be necessary to set up all your devices again within your Smart Life app account. The migration process does not support directly transferring devices from one integration to the other.
+
+
 ## Installation Guide
 [How to Install Smart Life Integration (Beta)](https://developer.tuya.com/en/docs/iot/Smart_Life_Integration?id=Kd0gk9baikbb7)
 
@@ -43,7 +53,7 @@ Seven primary categories, 50 secondary categories are supported now!
 
 :clap: [Supported Device Category](./docs/supported_devices.md)
 
-## Follow us
+## Follow Us
 
 Follow us to get more information and leading technology on the Internet of Things, as well as updates and activities on the [Tuya IoT Developer Platform](https://developer.tuya.com/?_source=6d8d369b1b09336f622047669af507c4)
 
