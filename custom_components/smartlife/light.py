@@ -328,6 +328,30 @@ LIGHTS: dict[str, tuple[SmartLifeLightEntityDescription, ...]] = {
             color_temp=DPCode.TEMP_VALUE,
         ),
     ),
+    # Unknown light product
+    # Found as Smart Star Projector as provided by diagnostics
+    # Not documented
+    "xktyd": (
+        SmartLifeLightEntityDescription(
+            key=DPCode.SWITCH_LED,
+            name=None,
+        ),
+        SmartLifeLightEntityDescription(
+            key=DPCode.COLOUR_SWITCH,
+            name="Star Color",
+            color_data=DPCode.COLOUR_DATA,
+            color_mode=DPCode.STAR_WORK_MODE,
+            default_color_type=DEFAULT_COLOR_TYPE_DATA_V2,
+            icon="mdi:star"
+
+        ),
+        SmartLifeLightEntityDescription(
+            key=DPCode.LASER_SWITCH,
+            name="Laser",
+            brightness=DPCode.LASER_BRIGHT,
+            icon="mdi:laser-pointer"
+        ),
+    )
 }
 
 # Socket (duplicate of `kg`)
@@ -504,12 +528,21 @@ class SmartLifeLightEntity(SmartLifeEntity, LightEntity):
             or (ATTR_BRIGHTNESS in kwargs and self.color_mode == ColorMode.HS)
         ):
             if self._color_mode_dpcode:
-                commands += [
-                    {
-                        "code": self._color_mode_dpcode,
-                        "value": WorkMode.COLOUR,
-                    },
-                ]
+                # Smart Star Projector uses some odd work modes, so we have to check for them implicitly
+                if self._color_mode_dpcode == DPCode.STAR_WORK_MODE:
+                    commands += [
+                        {
+                            "code": self._color_mode_dpcode,
+                            "value": WorkMode.MANUAL,
+                        },
+                    ]
+                else:
+                    commands += [
+                        {
+                            "code": self._color_mode_dpcode,
+                            "value": WorkMode.COLOUR,
+                        },
+                    ]
 
             if not (brightness := kwargs.get(ATTR_BRIGHTNESS)):
                 brightness = self.brightness or 0
@@ -604,6 +637,10 @@ class SmartLifeLightEntity(SmartLifeEntity, LightEntity):
         brightness = self.device.status.get(self._brightness.dpcode)
         if brightness is None:
             return None
+
+        # Sometimes an int_type has its value stored as a str, so we have to cast
+        if type(brightness) is str:
+            brightness = int(brightness)
 
         # Remap value to our scale
         brightness = self._brightness.remap_value_to(brightness)
