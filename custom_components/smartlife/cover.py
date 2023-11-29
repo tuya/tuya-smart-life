@@ -35,6 +35,10 @@ class SmartLifeCoverEntityDescription(CoverEntityDescription):
     open_instruction_value: str = "open"
     close_instruction_value: str = "close"
     stop_instruction_value: str = "stop"
+    product_id: str = None
+    work_state: str = None
+    reverse: bool = True
+    set_position_open_close: bool = True
 
 
 COVERS: dict[str, tuple[SmartLifeCoverEntityDescription, ...]] = {
@@ -42,6 +46,18 @@ COVERS: dict[str, tuple[SmartLifeCoverEntityDescription, ...]] = {
     # Note: Multiple curtains isn't documented
     # https://developer.tuya.com/en/docs/iot/categorycl?id=Kaiuz1hnpo7df
     "cl": (
+        # AM43 Blind drive motor
+        # Note: Only product_id is "zah67ekd"
+        SmartLifeCoverEntityDescription(
+            key=DPCode.CONTROL,
+            product_id="zah67ekd",
+            current_position=DPCode.PERCENT_STATE,
+            set_position=DPCode.PERCENT_CONTROL,
+            device_class=CoverDeviceClass.BLIND,
+            work_state=DPCode.WORK_STATE,
+            reverse=False,
+            set_position_open_close=False,
+        ),
         SmartLifeCoverEntityDescription(
             key=DPCode.CONTROL,
             name="Curtain",
@@ -158,11 +174,12 @@ async def async_setup_entry(
                         description.key in device.function
                         or description.key in device.status_range
                     ):
-                        entities.append(
-                            SmartLifeCoverEntity(
-                                device, hass_data.manager, description
+                        if description.product_id is None or description.product_id == device.product_id:
+                            entities.append(
+                                SmartLifeCoverEntity(device, hass_data.manager, description)
                             )
-                        )
+                            if description.product_id:
+                                break
 
         async_add_entities(entities)
 
@@ -192,6 +209,7 @@ class SmartLifeCoverEntity(SmartLifeEntity, CoverEntity):
         self.entity_description = description
         self._attr_unique_id = f"{super().unique_id}{description.key}"
         self._attr_supported_features = CoverEntityFeature(0)
+        self._send_position = None
 
         # Check if this cover is based on a switch or has controls
         if self.find_dpcode(description.key, prefer_function=True):
@@ -243,7 +261,7 @@ class SmartLifeCoverEntity(SmartLifeEntity, CoverEntity):
             return None
 
         return round(
-            self._current_position.remap_value_to(position, 0, 100, reverse=True)
+            self._current_position.remap_value_to(position, 0, 100, reverse=self.entity_description.reverse)
         )
 
     @property
@@ -259,6 +277,42 @@ class SmartLifeCoverEntity(SmartLifeEntity, CoverEntity):
             return None
 
         return round(self._tilt.remap_value_to(angle, 0, 100))
+
+    @property
+    def is_opening(self):
+        """Return if cover is opening."""
+        if self.entity_description.work_state is None:
+            return None
+
+        control = self.device.status.get(self.entity_description.key)
+        set_position = self._send_position or self.device.status.get(
+            self._set_position.dpcode
+        )
+        state = self.device.status.get(self.entity_description.work_state)
+
+        return (
+            control == "open"
+            and state == "opening"
+            and (set_position is None or set_position != self.current_cover_position)
+        )
+
+    @property
+    def is_closing(self):
+        """Return if cover is closing."""
+        if self.entity_description.work_state is None:
+            return None
+
+        control = self.device.status.get(self.entity_description.key)
+        set_position = self._send_position or self.device.status.get(
+            self._set_position.dpcode
+        )
+        state = self.device.status.get(self.entity_description.work_state)
+
+        return (
+            control == "close"
+            and state == "closing"
+            and (set_position is None or set_position != self.current_cover_position)
+        )
 
     @property
     def is_closed(self) -> bool | None:
@@ -292,18 +346,21 @@ class SmartLifeCoverEntity(SmartLifeEntity, CoverEntity):
         commands: list[dict[str, str | int]] = [
             {"code": self.entity_description.key, "value": value}
         ]
-
-        if self._set_position is not None:
+        if self._set_position is not None and self.entity_description.set_position_open_close:
+            self._send_position = round(
+                self._set_position.remap_value_from(
+                    100, 0, 100, reverse=self.entity_description.reverse
+                ),
+            )
             commands.append(
                 {
                     "code": self._set_position.dpcode,
-                    "value": round(
-                        self._set_position.remap_value_from(100, 0, 100, reverse=True),
-                    ),
+                    "value": self._send_position,
                 }
             )
 
         self._send_command(commands)
+        self.async_schedule_update_ha_state()
 
     def close_cover(self, **kwargs: Any) -> None:
         """Close cover."""
@@ -317,17 +374,21 @@ class SmartLifeCoverEntity(SmartLifeEntity, CoverEntity):
             {"code": self.entity_description.key, "value": value}
         ]
 
-        if self._set_position is not None:
+        if self._set_position is not None and self.entity_description.set_position_open_close:
+            self._send_position = round(
+                self._set_position.remap_value_from(
+                    0, 0, 100, reverse=self.entity_description.reverse
+                ),
+            )
             commands.append(
                 {
                     "code": self._set_position.dpcode,
-                    "value": round(
-                        self._set_position.remap_value_from(0, 0, 100, reverse=True),
-                    ),
+                    "value": self._send_position,
                 }
             )
 
         self._send_command(commands)
+        self.async_schedule_update_ha_state()
 
     def set_cover_position(self, **kwargs: Any) -> None:
         """Move the cover to a specific position."""
@@ -336,18 +397,20 @@ class SmartLifeCoverEntity(SmartLifeEntity, CoverEntity):
                 "Cannot set position, device doesn't provide methods to set it"
             )
 
+        self._send_position = round(
+            self._set_position.remap_value_from(
+                kwargs[ATTR_POSITION], 0, 100, reverse=self.entity_description.reverse
+            )
+        )
         self._send_command(
             [
                 {
                     "code": self._set_position.dpcode,
-                    "value": round(
-                        self._set_position.remap_value_from(
-                            kwargs[ATTR_POSITION], 0, 100, reverse=True
-                        )
-                    ),
+                    "value": self._send_position,
                 }
             ]
         )
+        self.async_schedule_update_ha_state()
 
     def stop_cover(self, **kwargs: Any) -> None:
         """Stop the cover."""
@@ -359,6 +422,7 @@ class SmartLifeCoverEntity(SmartLifeEntity, CoverEntity):
                 }
             ]
         )
+        self.async_schedule_update_ha_state()
 
     def set_cover_tilt_position(self, **kwargs: Any) -> None:
         """Move the cover tilt to a specific position."""
@@ -372,10 +436,9 @@ class SmartLifeCoverEntity(SmartLifeEntity, CoverEntity):
                 {
                     "code": self._tilt.dpcode,
                     "value": round(
-                        self._tilt.remap_value_from(
-                            kwargs[ATTR_TILT_POSITION], 0, 100, reverse=True
-                        )
+                        self._tilt.remap_value_from(kwargs[ATTR_TILT_POSITION], 0, 100, reverse=self.entity_description.reverse)
                     ),
                 }
             ]
         )
+        self.async_schedule_update_ha_state()

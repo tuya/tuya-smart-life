@@ -358,6 +358,7 @@ class DPCode(StrEnum):
     WIRELESS_ELECTRICITY = "wireless_electricity"
     WORK_MODE = "work_mode"  # Working mode
     WORK_POWER = "work_power"
+    WORK_STATE = "work_state"
     ADD_ELE = "add_ele"
 
 
@@ -560,6 +561,3 @@ for uom in UNITS:
         DEVICE_CLASS_UNITS.setdefault(device_class, {})[uom.unit] = uom
         for unit_alias in uom.aliases:
             DEVICE_CLASS_UNITS[device_class][unit_alias] = uom
-
-
-
