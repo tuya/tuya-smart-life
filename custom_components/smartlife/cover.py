@@ -360,7 +360,6 @@ class SmartLifeCoverEntity(SmartLifeEntity, CoverEntity):
             )
 
         self._send_command(commands)
-        self.async_schedule_update_ha_state()
 
     def close_cover(self, **kwargs: Any) -> None:
         """Close cover."""
@@ -388,7 +387,6 @@ class SmartLifeCoverEntity(SmartLifeEntity, CoverEntity):
             )
 
         self._send_command(commands)
-        self.async_schedule_update_ha_state()
 
     def set_cover_position(self, **kwargs: Any) -> None:
         """Move the cover to a specific position."""
@@ -410,7 +408,6 @@ class SmartLifeCoverEntity(SmartLifeEntity, CoverEntity):
                 }
             ]
         )
-        self.async_schedule_update_ha_state()
 
     def stop_cover(self, **kwargs: Any) -> None:
         """Stop the cover."""
@@ -422,7 +419,6 @@ class SmartLifeCoverEntity(SmartLifeEntity, CoverEntity):
                 }
             ]
         )
-        self.async_schedule_update_ha_state()
 
     def set_cover_tilt_position(self, **kwargs: Any) -> None:
         """Move the cover tilt to a specific position."""
@@ -441,4 +437,3 @@ class SmartLifeCoverEntity(SmartLifeEntity, CoverEntity):
                 }
             ]
         )
-        self.async_schedule_update_ha_state()
