@@ -306,6 +306,16 @@ NUMBERS: dict[str, tuple[NumberEntityDescription, ...]] = {
             device_class=NumberDeviceClass.TEMPERATURE,
             icon="mdi:thermometer-lines",
         ),
+    ),    
+    # Smart Towel Rack
+    # https://developer.tuya.com/en/docs/iot/categorymjj?id=Kakkmlm9k4cir
+    "mjj": (
+        NumberEntityDescription(
+            key=DPCode.TEMP_SET,
+            name="Temperature",
+            device_class=NumberDeviceClass.TEMPERATURE,
+            icon="mdi:thermometer-lines",
+        ),
     ),
 }
 
