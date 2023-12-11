@@ -1046,6 +1046,28 @@ SENSORS: dict[str, tuple[SmartLifeSensorEntityDescription, ...]] = {
             state_class=SensorStateClass.MEASUREMENT,
         ),
     ),
+    # Smart Towel Rack
+    # https://developer.tuya.com/en/docs/iot/categorymjj?id=Kakkmlm9k4cir
+    "mjj": (
+        SmartLifeSensorEntityDescription(
+            key=DPCode.TEMP_CURRENT,
+            name="Temperature",
+            device_class=SensorDeviceClass.TEMPERATURE,
+            state_class=SensorStateClass.MEASUREMENT,
+        ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.COUNTDOWN_LEFT,
+            name="Countdown left",
+            device_class=SensorDeviceClass.DURATION,
+            state_class=SensorStateClass.MEASUREMENT,
+        ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.WORK_STATE,
+            name="Work state",
+            icon="mdi:eye",
+            entity_category=EntityCategory.DIAGNOSTIC,
+        ),
+    ),
 }
 
 # Socket (duplicate of `kg`)
