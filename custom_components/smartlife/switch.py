@@ -703,7 +703,8 @@ SWITCHES: dict[str, tuple[SwitchEntityDescription, ...]] = {
         SwitchEntityDescription(
             key=DPCode.SWITCH,
             name="Power",
-            icon=" mdi:power",
+            icon="mdi:power",
+            entity_category=EntityCategory.CONFIG,
         ),
     ),
 }
