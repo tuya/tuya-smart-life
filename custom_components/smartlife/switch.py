@@ -697,6 +697,15 @@ SWITCHES: dict[str, tuple[SwitchEntityDescription, ...]] = {
             entity_category=EntityCategory.CONFIG,
         ),
     ),
+    # Smart Towel Rack
+    # https://developer.tuya.com/en/docs/iot/categorymjj?id=Kakkmlm9k4cir
+    "mjj": (
+        SwitchEntityDescription(
+            key=DPCode.SWITCH,
+            name="Power",
+            icon=" mdi:power-cycle",
+        ),
+    ),
 }
 
 # Socket (duplicate of `pc`)
