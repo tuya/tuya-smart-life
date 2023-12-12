@@ -1051,7 +1051,7 @@ SENSORS: dict[str, tuple[SmartLifeSensorEntityDescription, ...]] = {
     "mjj": (
         SmartLifeSensorEntityDescription(
             key=DPCode.TEMP_CURRENT,
-            name="Temperature",
+            name="Current temperature",
             device_class=SensorDeviceClass.TEMPERATURE,
             state_class=SensorStateClass.MEASUREMENT,
         ),
