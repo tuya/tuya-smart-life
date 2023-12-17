@@ -28,7 +28,7 @@ from .base import IntegerTypeData, SmartLifeEntity
 from .const import DOMAIN, SMART_LIFE_DISCOVERY_NEW, DPCode, DPType
 
 SMART_LIFE_HVAC_TO_HA = {
-    "auto": HVACMode.HEAT_COOL,
+    "auto": HVACMode.AUTO,
     "cold": HVACMode.COOL,
     "freeze": HVACMode.COOL,
     "heat": HVACMode.HEAT,
