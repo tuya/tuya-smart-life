@@ -64,9 +64,10 @@ async def async_setup_entry(
         for device_id in device_ids:
             device = hass_data.manager.device_map[device_id]
             if description := HUMIDIFIERS.get(device.category):
-                entities.append(
-                    SmartLifeHumidifierEntity(device, hass_data.manager, description)
-                )
+                if description.key in device.status or any(item in device.status for item in description.dpcode):
+                    entities.append(
+                        SmartLifeHumidifierEntity(device, hass_data.manager, description)
+                    )
         async_add_entities(entities)
 
     async_discover_device([*hass_data.manager.device_map])
