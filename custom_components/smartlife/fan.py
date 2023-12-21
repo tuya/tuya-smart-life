@@ -45,7 +45,7 @@ async def async_setup_entry(
         entities: list[SmartLifeFanEntity] = []
         for device_id in device_ids:
             device = hass_data.manager.device_map[device_id]
-            if device and device.category in SMART_LIFE_SUPPORT_TYPE:
+            if device and device.category in SMART_LIFE_SUPPORT_TYPE and any(e in device.status for e in [DPCode.SWITCH_FAN, DPCode.FAN_SWITCH, DPCode.SWITCH]):
                 entities.append(SmartLifeFanEntity(device, hass_data.manager))
         async_add_entities(entities)
 
