@@ -51,6 +51,69 @@ Seven primary categories, 50 secondary categories are supported now!
 
 :clap: [Supported Device Category](./docs/supported_devices.md)
 
+## Category/Standard Instruction Set Expansion Development
+
+When developers find that a certain functionality is not supported in Smartlife, developers can develop that support following these steps:
+
+#### Step 1: Download and Review Diagnostic File 
+
+Download the diagnostic file and review the category and supported standard instruction set data of the device.
+* `data["category"]`: Device category
+* `data["function"]` and `data["status_range"]`: Standard instruction set's Data type and Value description
+* `data["status"]`: Value of the standard instruction set
+* See the [Standard Instruction Set Document](https://developer.tuya.com/en/docs/iot/standarddescription?id=K9i5ql6waswzq) available in the [Home Assistant Entity Development Guide](https://developers.home-assistant.io/docs/core/entity) for more details.
+
+#### Step 2: Refer to Smartlife's Supported Entity Code Files
+
+Smartlife supports 16 entity code files:
+[Code file address](https://github.com/tuya/tuya-smart-life/tree/main/custom_components/smartlife)
+1. `alarm_control_panel.py` 
+2. `binary_sensor.py` 
+3. `button.py` 
+4. `camera.py`
+5. `climate.py`
+6. `cover.py`
+7. `fan.py`
+8. `humidifier.py`
+9. `light.py`
+10. `number.py`
+11. `scene.py`
+12. `select.py`
+13. `sensor.py`
+14. `siren.py`
+15. `switch.py`
+16. `vacuum.py`
+
+Add the entity's support in the relevant file(s) as per the Standard Instruction Set in the Home Assistant Entity Development Guide. If the existing files don't suffice, you can add new entity files to accommodate new entity types.
+
+#### Step 3: Test Before Submitting PR
+
+Finally, ensure that the modifications are tested locally before submitting your PR.
+
+#### Example - Adding Functionality 
+
+As an example, you may need to add numeric display functionality for the standard instruction "cur_current" under the "dlq" category in `sensor.py`. Locate the "dlq" category in the SENSORS dictionary (add it if not already present), and implement support for the standard instruction "cur_current".
+[Code Linking](https://github.com/tuya/tuya-smart-life/blob/main/custom_components/smartlife/sensor.py#L829-L835)
+
+
+### Pull Requests Workflow
+
+1. **Fork the project**: Developers first need to fork the `dev` branch of our project *smartlife* on GitHub to their own accounts.
+
+2. **Start development**: On the newly forked branch, developers make modifications and further developments to category and standard instruction sets.
+
+3. **Commit changes**: After the development is accomplished, developers need to commit their changes to their GitHub repositories.
+
+4. **Create a Pull Request**: Developers then need to create a Pull Request in their GitHub repository, requesting their modifications to be merged into your `dev` branch.
+
+5. **Review the Pull Request**: The submitted Pull Requests need to be reviewed.
+
+6. **Testing**: The internal staff regularly carry out tests.
+
+7. **Merge to `master`**: If the tests on the `dev` branch show no issues, then the changes are merged into the `master` branch.
+
+8. **Release a new version**: On the `master` branch, release a new version for users.
+
 ## Follow Us
 
 Follow us to get more information and leading technology on the Internet of Things, as well as updates and activities on the [Tuya IoT Developer Platform](https://developer.tuya.com/?_source=6d8d369b1b09336f622047669af507c4)
