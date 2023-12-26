@@ -110,9 +110,9 @@ As an example, you may need to add numeric display functionality for the standar
 
 6. **Testing**: The internal staff regularly carry out tests.
 
-7. **Merge to `master`**: If the tests on the `dev` branch show no issues, then the changes are merged into the `master` branch.
+7. **Merge to `main`**: If the tests on the `dev` branch show no issues, then the changes are merged into the `main` branch.
 
-8. **Release a new version**: On the `master` branch, release a new version for users.
+8. **Release a new version**: On the `main` branch, release a new version for users.
 
 ## Follow Us
 
