@@ -1046,7 +1046,8 @@ SENSORS: dict[str, tuple[SmartLifeSensorEntityDescription, ...]] = {
             state_class=SensorStateClass.MEASUREMENT,
         ),
     ),
-    # Switch single button
+    # Button or Multi-button device
+    # https://developer.tuya.com/en/docs/iot/f?id=Kbeoa30s4fcdf
     "wxkg": (
         SmartLifeSensorEntityDescription(
             key=DPCode.SWITCH_MODE_1,
