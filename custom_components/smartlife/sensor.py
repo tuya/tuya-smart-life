@@ -1053,6 +1053,7 @@ SENSORS: dict[str, tuple[SmartLifeSensorEntityDescription, ...]] = {
             name="Click",
             icon="mdi:gesture-tap-button",
         ),
+        *BATTERY_SENSORS,
     ),
 }
 
