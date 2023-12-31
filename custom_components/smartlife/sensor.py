@@ -1053,6 +1053,46 @@ SENSORS: dict[str, tuple[SmartLifeSensorEntityDescription, ...]] = {
             name="Click",
             icon="mdi:gesture-tap-button",
         ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.SWITCH_MODE_2,
+            name="Click",
+            icon="mdi:gesture-tap-button",
+        ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.SWITCH_MODE_3,
+            name="Click",
+            icon="mdi:gesture-tap-button",
+        ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.SWITCH_MODE_4,
+            name="Click",
+            icon="mdi:gesture-tap-button",
+        ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.SWITCH_MODE_5,
+            name="Click",
+            icon="mdi:gesture-tap-button",
+        ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.SWITCH_MODE_6,
+            name="Click",
+            icon="mdi:gesture-tap-button",
+        ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.SWITCH_MODE_7,
+            name="Click",
+            icon="mdi:gesture-tap-button",
+        ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.SWITCH_MODE_8,
+            name="Click",
+            icon="mdi:gesture-tap-button",
+        ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.SWITCH_MODE_9,
+            name="Click",
+            icon="mdi:gesture-tap-button",
+        ),
         *BATTERY_SENSORS,
     ),
 }
