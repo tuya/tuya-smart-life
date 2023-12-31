@@ -1046,6 +1046,14 @@ SENSORS: dict[str, tuple[SmartLifeSensorEntityDescription, ...]] = {
             state_class=SensorStateClass.MEASUREMENT,
         ),
     ),
+    # Switch single button
+    "wxkg": (
+        SmartLifeSensorEntityDescription(
+            key=DPCode.SWITCH_MODE_1,
+            name="Click",
+            icon="mdi:gesture-tap-button",
+        ),
+    ),
 }
 
 # Socket (duplicate of `kg`)
