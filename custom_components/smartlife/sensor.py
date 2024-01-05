@@ -1046,6 +1046,56 @@ SENSORS: dict[str, tuple[SmartLifeSensorEntityDescription, ...]] = {
             state_class=SensorStateClass.MEASUREMENT,
         ),
     ),
+    # Button or Multi-button device
+    # https://developer.tuya.com/en/docs/iot/f?id=Kbeoa30s4fcdf
+    "wxkg": (
+        SmartLifeSensorEntityDescription(
+            key=DPCode.SWITCH_MODE_1,
+            name="Button 1",
+            icon="mdi:gesture-tap-button",
+        ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.SWITCH_MODE_2,
+            name="Button 2",
+            icon="mdi:gesture-tap-button",
+        ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.SWITCH_MODE_3,
+            name="Button 3",
+            icon="mdi:gesture-tap-button",
+        ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.SWITCH_MODE_4,
+            name="Button 4",
+            icon="mdi:gesture-tap-button",
+        ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.SWITCH_MODE_5,
+            name="Button 5",
+            icon="mdi:gesture-tap-button",
+        ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.SWITCH_MODE_6,
+            name="Button 6",
+            icon="mdi:gesture-tap-button",
+        ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.SWITCH_MODE_7,
+            name="Button 7",
+            icon="mdi:gesture-tap-button",
+        ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.SWITCH_MODE_8,
+            name="Button 8",
+            icon="mdi:gesture-tap-button",
+        ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.SWITCH_MODE_9,
+            name="Button 9",
+            icon="mdi:gesture-tap-button",
+        ),
+        *BATTERY_SENSORS,
+    ),
 }
 
 # Socket (duplicate of `kg`)

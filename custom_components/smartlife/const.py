@@ -300,6 +300,15 @@ class DPCode(StrEnum):
     SWITCH_LED_1 = "switch_led_1"
     SWITCH_LED_2 = "switch_led_2"
     SWITCH_LED_3 = "switch_led_3"
+    SWITCH_MODE_1 = "switch_mode1"  # Button
+    SWITCH_MODE_2 = "switch_mode2"
+    SWITCH_MODE_3 = "switch_mode3"
+    SWITCH_MODE_4 = "switch_mode4"
+    SWITCH_MODE_5 = "switch_mode5"
+    SWITCH_MODE_6 = "switch_mode6"
+    SWITCH_MODE_7 = "switch_mode7"
+    SWITCH_MODE_8 = "switch_mode8"
+    SWITCH_MODE_9 = "switch_mode9"
     SWITCH_NIGHT_LIGHT = "switch_night_light"
     SWITCH_SAVE_ENERGY = "switch_save_energy"
     SWITCH_SOUND = "switch_sound"  # Voice switch
