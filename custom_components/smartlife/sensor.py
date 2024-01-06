@@ -747,6 +747,15 @@ SENSORS: dict[str, tuple[SmartLifeSensorEntityDescription, ...]] = {
             state_class=SensorStateClass.TOTAL_INCREASING,
         ),
         SmartLifeSensorEntityDescription(
+            key=DPCode.CUR_NEUTRAL,
+            name="Total reverse energy",
+            device_class=SensorDeviceClass.ENERGY,
+            state_class=SensorStateClass.TOTAL_INCREASING,
+            native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
+            entity_registry_enabled_default=True,
+            icon="mdi:counter",
+        ),
+        SmartLifeSensorEntityDescription(
             key=DPCode.PHASE_A,
             name="Phase A current",
             device_class=SensorDeviceClass.CURRENT,
