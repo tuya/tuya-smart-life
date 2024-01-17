@@ -1096,6 +1096,30 @@ SENSORS: dict[str, tuple[SmartLifeSensorEntityDescription, ...]] = {
         ),
         *BATTERY_SENSORS,
     ),
+    # Cat toilet
+    # https://developer.tuya.com/en/docs/iot/categorymsp?id=Kakg2t7714ky7
+    "msp":(
+        SmartLifeSensorEntityDescription(
+            key=DPCode.CAT_WEIGHT,
+            name="Pet weight",
+            device_class=SensorDeviceClass.WEIGHT,
+            state_class=SensorStateClass.MEASUREMENT,
+            icon="mdi:weight",
+        ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.EXCRETION_TIMES_DAY,
+            name="Excretions per day",
+            state_class=SensorStateClass.TOTAL_INCREASING,
+            icon="mdi:counter",
+        ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.EXCRETION_TIME_DAY,
+            name="Excretion time per day",
+            device_class=SensorDeviceClass.DURATION,
+            state_class=SensorStateClass.MEASUREMENT,
+            icon="mdi:timer",
+        )
+    )
 }
 
 # Socket (duplicate of `kg`)

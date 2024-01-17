@@ -697,6 +697,54 @@ SWITCHES: dict[str, tuple[SwitchEntityDescription, ...]] = {
             entity_category=EntityCategory.CONFIG,
         ),
     ),
+    # Cat toilet
+    # https://developer.tuya.com/en/docs/iot/categorymsp?id=Kakg2t7714ky7
+    "msp": (
+        SwitchEntityDescription(
+            key=DPCode.SWITCH,
+            name="Switch",
+        ),
+        SwitchEntityDescription(
+            key=DPCode.SLEEP,
+            name="Sleep mode",
+            icon="mdi:sleep"
+        ),
+        SwitchEntityDescription(
+            key=DPCode.AUTO_CLEAN,
+            name="Automatic cleaning",
+            icon="mdi:vacuum"
+        ),
+        SwitchEntityDescription(
+            key=DPCode.MANUAL_CLEAN,
+            name="Automatic cleaning",
+            icon="mdi:hand-front-right"
+        ),
+        SwitchEntityDescription(
+            key=DPCode.UV,
+            name="UV sterilization",
+            icon="mdi:sun"
+        ),
+        SwitchEntityDescription(
+            key=DPCode.LIGHT,
+            name="Mood light",
+            icon="mdi:light"
+        ),
+        SwitchEntityDescription(
+            key=DPCode.FACTORY_RESET,
+            name="Restore factory defaults",
+            icon="mdi:reload"
+        ),
+        SwitchEntityDescription(
+            key=DPCode.START,
+            name="Start",
+            icon="mdi:play-circle"
+        ),
+        SwitchEntityDescription(
+            key=DPCode.DEODORIZATION,
+            name="Deodorization and sterilization",
+            icon="mdi:scent"
+        ),
+    ),
 }
 
 # Socket (duplicate of `pc`)

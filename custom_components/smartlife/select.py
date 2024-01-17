@@ -359,6 +359,20 @@ SELECTS: dict[str, tuple[SelectEntityDescription, ...]] = {
             icon="mdi:water-percent",
         ),
     ),
+    # Cat toilet
+    # https://developer.tuya.com/en/docs/iot/categorymsp?id=Kakg2t7714ky7
+    "msp": (
+        SelectEntityDescription(
+            key=DPCode.WORK_MODE,
+            name="Working mode",
+            icon="mdi:cog"
+        ),
+        SelectEntityDescription(
+            key=DPCode.STATUS,
+            name="Status",
+            icon="mdi:state-machine"
+        ),
+    ),
 }
 
 # Socket (duplicate of `kg`)

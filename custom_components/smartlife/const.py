@@ -368,6 +368,20 @@ class DPCode(StrEnum):
     WORK_MODE = "work_mode"  # Working mode
     WORK_POWER = "work_power"
     ADD_ELE = "add_ele"
+    EXCRETION_TIMES_DAY = "excretion_times_day"
+    EXCRETION_TIME_DAY = "excretion_time_day"
+    CAT_WEIGHT = "cat_weight"
+    AUTO_CLEAN = "auto_clean"
+    MANUAL_CLEAN = "manual_clean"
+    FACTORY_RESET = "factory_reset"
+    DEODORIZATION = "deodorization"
+    SLEEP_START_TIME = "sleep_start_time"
+    SLEEP_END_TIME = "sleep_end_time"
+    UV_START_TIME = "uv_start_time"
+    UV_END_TIME = "uv_end_time"
+    DEO_START_TIME = "deo_start_time"
+    DEO_END_TIME = "deo_end_time"
+    DELAY_CLEAN_TIME = "delay_clean_time"
 
 
 @dataclass
