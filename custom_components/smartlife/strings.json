@@ -209,6 +209,13 @@
           "good": "Good",
           "severe": "Severe"
         }
+     "air_quality_index": {
+        "state": {
+          "level_1": "Great",
+          "level_2": "Mild",
+          "level_3": "Good",
+          "level_4": "Severe"
+        }
       }
     }
   }
