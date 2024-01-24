@@ -281,6 +281,18 @@ SENSORS: dict[str, tuple[SmartLifeSensorEntityDescription, ...]] = {
             device_class=SensorDeviceClass.PM25,
             state_class=SensorStateClass.MEASUREMENT,
         ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.PM1_VALUE,
+            name="Particulate matter 1 µm",
+            device_class=SensorDeviceClass.PM1,
+            state_class=SensorStateClass.MEASUREMENT,
+        ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.PM10_VALUE,
+            name="Particulate matter 10 µm",
+            device_class=SensorDeviceClass.PM10,
+            state_class=SensorStateClass.MEASUREMENT,
+        ),
     ),
     # Formaldehyde Detector
     # Note: Not documented
