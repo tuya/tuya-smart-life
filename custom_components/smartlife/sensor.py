@@ -282,13 +282,13 @@ SENSORS: dict[str, tuple[SmartLifeSensorEntityDescription, ...]] = {
             state_class=SensorStateClass.MEASUREMENT,
         ),
         SmartLifeSensorEntityDescription(
-            key=DPCode.PM1_VALUE,
+            key=DPCode.PM1,
             name="Particulate matter 1 µm",
             device_class=SensorDeviceClass.PM1,
             state_class=SensorStateClass.MEASUREMENT,
         ),
         SmartLifeSensorEntityDescription(
-            key=DPCode.PM10_VALUE,
+            key=DPCode.PM10,
             name="Particulate matter 10 µm",
             device_class=SensorDeviceClass.PM10,
             state_class=SensorStateClass.MEASUREMENT,
