@@ -241,7 +241,9 @@ class DPCode(StrEnum):
     PM10 = "pm10"
     PM25 = "pm25"
     PM25_STATE = "pm25_state"
+    PM1_VALUE = "pm1_value"
     PM25_VALUE = "pm25_value"
+    PM10_VALUE = "pm10_value"
     POWDER_SET = "powder_set"  # Powder
     POWER = "power"
     POWER_GO = "power_go"
