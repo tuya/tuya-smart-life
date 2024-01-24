@@ -293,6 +293,12 @@ SENSORS: dict[str, tuple[SmartLifeSensorEntityDescription, ...]] = {
             device_class=SensorDeviceClass.PM10,
             state_class=SensorStateClass.MEASUREMENT,
         ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.AIR_QUALITY_INDEX,
+            name="Air quality index",
+            icon="mdi:air-filter",
+            translation_key="air_quality_index",
+        ),
     ),
     # Formaldehyde Detector
     # Note: Not documented
