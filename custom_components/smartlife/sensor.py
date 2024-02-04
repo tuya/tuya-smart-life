@@ -281,6 +281,32 @@ SENSORS: dict[str, tuple[SmartLifeSensorEntityDescription, ...]] = {
             device_class=SensorDeviceClass.PM25,
             state_class=SensorStateClass.MEASUREMENT,
         ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.PM1,
+            name="Particulate matter 1 µm",
+            device_class=SensorDeviceClass.PM1,
+            state_class=SensorStateClass.MEASUREMENT,
+        ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.PM10,
+            name="Particulate matter 10 µm",
+            device_class=SensorDeviceClass.PM10,
+            state_class=SensorStateClass.MEASUREMENT,
+        ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.AIR_QUALITY_INDEX,
+            name="Air quality index",
+            icon="mdi:air-filter",
+            translation_key="air_quality_index",
+        ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.BATTERY_PERCENTAGE,
+            name="Battery",
+            native_unit_of_measurement=PERCENTAGE,
+            device_class=SensorDeviceClass.BATTERY,
+            state_class=SensorStateClass.MEASUREMENT,
+            entity_category=EntityCategory.DIAGNOSTIC,
+        ),
     ),
     # Formaldehyde Detector
     # Note: Not documented
@@ -1044,6 +1070,28 @@ SENSORS: dict[str, tuple[SmartLifeSensorEntityDescription, ...]] = {
             name="Humidity",
             device_class=SensorDeviceClass.HUMIDITY,
             state_class=SensorStateClass.MEASUREMENT,
+        ),
+    ),
+    # Smart Towel Rack
+    # https://developer.tuya.com/en/docs/iot/categorymjj?id=Kakkmlm9k4cir
+    "mjj": (
+        SmartLifeSensorEntityDescription(
+            key=DPCode.TEMP_CURRENT,
+            name="Current temperature",
+            device_class=SensorDeviceClass.TEMPERATURE,
+            state_class=SensorStateClass.MEASUREMENT,
+        ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.COUNTDOWN_LEFT,
+            name="Countdown left",
+            device_class=SensorDeviceClass.DURATION,
+            state_class=SensorStateClass.MEASUREMENT,
+        ),
+        SmartLifeSensorEntityDescription(
+            key=DPCode.WORK_STATE,
+            name="Work state",
+            icon="mdi:eye",
+            entity_category=EntityCategory.DIAGNOSTIC,
         ),
     ),
 }

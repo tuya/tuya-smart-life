@@ -197,6 +197,14 @@
                     "severe": "Severe"
                 }
             },
+            "air_quality_index": {
+                "state": {
+                    "level_1": "Good",
+                    "level_2": "Great",
+                    "level_3": "Mild",
+                    "level_4": "Severe"
+                }
+            },
             "status": {
                 "state": {
                     "boiling_temp": "Boiling temperature",

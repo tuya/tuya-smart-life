@@ -359,6 +359,17 @@ SELECTS: dict[str, tuple[SelectEntityDescription, ...]] = {
             icon="mdi:water-percent",
         ),
     ),
+    # Smart Towel Rack
+    # https://developer.tuya.com/en/docs/iot/categorymjj?id=Kakkmlm9k4cir
+    "mjj": (
+        SelectEntityDescription(
+            key=DPCode.COUNTDOWN_SET,
+            name="Countdown",
+            entity_category=EntityCategory.CONFIG,
+            icon="mdi:timer-cog-outline",
+            translation_key="countdown",
+        ),
+    ),
 }
 
 # Socket (duplicate of `kg`)
