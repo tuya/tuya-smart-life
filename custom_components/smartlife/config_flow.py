@@ -111,11 +111,9 @@ class SmartlifeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 def _generate_qr_code(data: str) -> str:
     """Generate a base64 PNG string represent QR Code image of data."""
     import pyqrcode  # pylint: disable=import-outside-toplevel
-#
+
     qr_code = pyqrcode.create(data)
+
+    # Generate PNG as base64 string, this can't be modified by HA theme setting
     image_as_str = qr_code.png_as_base64_str(scale=4) # PNG is generated as black and white by default
-    html_img = '<img src="data:image/png;base64,{}">'.format(image_as_str)
-
-    LOGGER.debug("qr_code=%s", html_img)
-
-    return html_img
+    return '<img src="data:image/png;base64,{}">'.format(image_as_str)
