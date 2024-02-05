@@ -111,20 +111,11 @@ class SmartlifeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 def _generate_qr_code(data: str) -> str:
     """Generate a base64 PNG string represent QR Code image of data."""
     import pyqrcode  # pylint: disable=import-outside-toplevel
-
+#
     qr_code = pyqrcode.create(data)
+    image_as_str = qr_code.png_as_base64_str(scale=4) # PNG is generated as black and white by default
+    html_img = '<img src="data:image/png;base64,{}">'.format(image_as_str)
 
-    with BytesIO() as buffer:
-        qr_code.svg(file=buffer, scale=4)
-        return str(
-            buffer.getvalue()
-            .decode("ascii")
-            .replace("\n", "")
-            .replace(
-                (
-                    '<?xml version="1.0" encoding="UTF-8"?>'
-                    '<svg xmlns="http://www.w3.org/2000/svg"'
-                ),
-                "<svg",
-            )
-        )
+    LOGGER.debug("qr_code=%s", html_img)
+
+    return html_img
