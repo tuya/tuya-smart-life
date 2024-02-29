@@ -39,7 +39,7 @@
       "macaddress": "D81F12*"
     }
   ],
-  "documentation": "https://www.home-assistant.io/integrations/smartlife",
+  "documentation": "https://github.com/tuya/tuya-smart-life",
   "integration_type": "hub",
   "iot_class": "cloud_push",
   "version": "0.1.0",
