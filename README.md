@@ -10,6 +10,8 @@
 [![GitHub forks](https://img.shields.io/github/forks/tuya/tuya-smart-life.svg?style=social&label=Fork)](https://gitHub.com/tuya/tuya-smart-life/network/)
 [![GitHub stars](https://img.shields.io/github/stars/tuya/tuya-smart-life.svg?style=social&label=Star)](https://GitHub.com/tuya/tuya-smart-life/stargazers/)
 
+:warning: **This project has now officially been integrated into the Home Assistant official project core repository, corresponding to version 2024.2. This project will no longer continue to iterate. Subsequent iterations and support will be carried out under the Home Assistant official project. If you have any questions, please communicate at https://github.com/home-assistant/core/issues. Thank you.**
+
 If you like Tuya Smart Life (Beta) Integration, please give it a star or fork it and contribute!
 
 # Smart Life（Beta）Integration Documentation
