@@ -114,17 +114,6 @@ def _generate_qr_code(data: str) -> str:
 
     qr_code = pyqrcode.create(data)
 
-    with BytesIO() as buffer:
-        qr_code.svg(file=buffer, scale=4)
-        return str(
-            buffer.getvalue()
-            .decode("ascii")
-            .replace("\n", "")
-            .replace(
-                (
-                    '<?xml version="1.0" encoding="UTF-8"?>'
-                    '<svg xmlns="http://www.w3.org/2000/svg"'
-                ),
-                "<svg",
-            )
-        )
+    # Generate PNG as base64 string, this can't be modified by HA theme setting
+    image_as_str = qr_code.png_as_base64_str(scale=4) # PNG is generated as black and white by default
+    return '<img src="data:image/png;base64,{}">'.format(image_as_str)
