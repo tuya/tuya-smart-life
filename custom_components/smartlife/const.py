@@ -65,6 +65,7 @@ class WorkMode(StrEnum):
     """Work modes."""
 
     COLOUR = "colour"
+    MANUAL = "manual"
     MUSIC = "music"
     SCENE = "scene"
     WHITE = "white"
@@ -143,6 +144,7 @@ class DPCode(StrEnum):
     COLOUR_DATA = "colour_data"  # Colored light mode
     COLOUR_DATA_HSV = "colour_data_hsv"  # Colored light mode
     COLOUR_DATA_V2 = "colour_data_v2"  # Colored light mode
+    COLOUR_SWITCH = "colour_switch"
     COOK_TEMPERATURE = "cook_temperature"
     COOK_TIME = "cook_time"
     CONCENTRATION_SET = "concentration_set"  # Concentration setting
@@ -202,6 +204,8 @@ class DPCode(StrEnum):
     HUMIDITY_SET = "humidity_set"  # Humidity setting
     HUMIDITY_VALUE = "humidity_value"  # Humidity
     IPC_WORK_MODE = "ipc_work_mode"
+    LASER_BRIGHT = "laser_bright"
+    LASER_SWITCH = "laser_switch"
     LED_TYPE_1 = "led_type_1"
     LED_TYPE_2 = "led_type_2"
     LED_TYPE_3 = "led_type_3"
@@ -276,6 +280,7 @@ class DPCode(StrEnum):
     SOS_STATE = "sos_state"  # Emergency mode
     SPEED = "speed"  # Speed level
     SPRAY_MODE = "spray_mode"  # Spraying mode
+    STAR_WORK_MODE = "star_work_mode"
     START = "start"  # Start
     STATUS = "status"
     STERILIZATION = "sterilization"  # Sterilization

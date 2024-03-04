@@ -307,6 +307,15 @@ NUMBERS: dict[str, tuple[NumberEntityDescription, ...]] = {
             icon="mdi:thermometer-lines",
         ),
     ),
+    "xktyd": (
+        NumberEntityDescription(
+            key=DPCode.COUNTDOWN,
+            name="Countdown",
+            device_class=NumberDeviceClass.DURATION,
+            icon="mdi:timer-cog-outline",
+            translation_key="countdown",
+        ),
+    )
 }
 
 
@@ -410,6 +419,10 @@ class SmartLifeNumberEntity(SmartLifeEntity, NumberEntity):
         # Raw value
         if (value := self.device.status.get(self.entity_description.key)) is None:
             return None
+
+        # Sometimes an int_type has its value stored as a str, so we have to cast
+        if type(value) is str:
+            value = int(value)
 
         return self._number.scale_value(value)
 

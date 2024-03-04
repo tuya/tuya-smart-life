@@ -30,6 +30,7 @@ SMART_LIFE_SUPPORT_TYPE = {
     "fskg",  # Fan wall switch
     "kj",  # Air Purifier
     "cs",  # Dehumidifier
+    "xktyd", # Smart Star Projector motor and motor speed are reported as fan
 }
 
 
@@ -244,6 +245,11 @@ class SmartLifeFanEntity(SmartLifeEntity, FanEntity):
         if self._speed is not None:
             if (value := self.device.status.get(self._speed.dpcode)) is None:
                 return None
+
+            # Sometimes an int_type has its value stored as a str, so we have to cast
+            if type(value) is str:
+                value = int(value)
+
             return int(self._speed.remap_value_to(value, 1, 100))
 
         if self._speeds is not None:
