@@ -307,6 +307,45 @@ NUMBERS: dict[str, tuple[NumberEntityDescription, ...]] = {
             icon="mdi:thermometer-lines",
         ),
     ),
+    # Cat toilet
+    # https://developer.tuya.com/en/docs/iot/categorymsp?id=Kakg2t7714ky7
+    "msp": (
+        NumberEntityDescription(
+            key=DPCode.SLEEP_START_TIME,
+            name="Start time of sleep",
+            icon="mdi:bed-clock",
+        ),
+        NumberEntityDescription(
+            key=DPCode.SLEEP_END_TIME,
+            name="End time of sleep mode",
+            icon="mdi:alarm",
+        ),
+        NumberEntityDescription(
+            key=DPCode.UV_START_TIME,
+            name="Start time of ultraviolet radiation",
+            icon="mdi:sun-clock",
+        ),
+        NumberEntityDescription(
+            key=DPCode.UV_END_TIME,
+            name="End time of ultraviolet radiation",
+            icon="mdi:sun-otuline-clock",
+        ),
+        NumberEntityDescription(
+            key=DPCode.DEO_START_TIME,
+            name="Start time of deodorization",
+            icon="mdi:timer-start",
+        ),
+        NumberEntityDescription(
+            key=DPCode.DEO_END_TIME,
+            name="End time of deodorization",
+            icon="mdi:timer-stop",
+        ),
+        NumberEntityDescription(
+            key=DPCode.DELAY_CLEAN_TIME,
+            name="Delay time of cleaning",
+            icon="mdi:timer-pause",
+        ),
+    ),
 }
 
 
